@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://bosses.gamer.gd/?i=2 -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boss Timer Tracker</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 {
+      text-align: center; color: white; margin-bottom: 30px;
+      font-size: 2.5em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .boss-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px; margin-bottom: 30px;
+    }
+    .boss-card {
+      background: rgba(255,255,255,0.95); border-radius: 15px;
+      padding: 25px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    .boss-name { font-size: 1.5em; font-weight: bold; margin-bottom: 10px; }
+    .boss-duration { margin-bottom: 20px; }
+    .timer-display {
+      font-size: 2em; font-weight: bold; text-align: center;
+      margin: 20px 0; padding: 15px; border-radius: 10px;
+    }
+    .timer-inactive { background: #f0f0f0; color: #999; }
+    .timer-active { background: #4CAF50; color: white; }
+    .timer-warning { background: #ff9800; color: white; }
+    .button {
+      padding: 12px 24px; border: none; border-radius: 8px;
+      font-size: 1em; font-weight: bold; cursor: pointer; margin: 5px;
+    }
+    .btn-death { background: #e74c3c; color: white; }
+    .btn-reset { background: #95a5a6; color: white; }
+    .btn-global { background: #9b59b6; color: white; padding: 15px 30px; font-size: 1.2em; }
+    .btn-test { background: #3498db; color: white; }
+    .status { text-align: center; margin-top: 10px; font-weight: bold; }
+    .notification {
+      position: fixed; top: 20px; right: 20px; background: #e74c3c;
+      color: white; padding: 15px 25px; border-radius: 10px; font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🐉 Boss Timer Tracker</h1>
+
+    <div class="boss-grid" id="bossGrid"><div class="boss-card">
+          <div class="boss-name">Gigantus</div>
+          <div class="boss-duration">Respawn: 2h</div>
+          <div class="timer-display timer-inactive" id="timer-Gigantus">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Gigantus&#39;)" id="btn-Gigantus">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Gigantus&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Gigantus">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Arched</div>
+          <div class="boss-duration">Respawn: 2h</div>
+          <div class="timer-display timer-inactive" id="timer-Arched">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Arched&#39;)" id="btn-Arched">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Arched&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Arched">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Chimera</div>
+          <div class="boss-duration">Respawn: 3h</div>
+          <div class="timer-display timer-inactive" id="timer-Chimera">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Chimera&#39;)" id="btn-Chimera">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Chimera&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Chimera">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Flonebe</div>
+          <div class="boss-duration">Respawn: 3h</div>
+          <div class="timer-display timer-inactive" id="timer-Flonebe">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Flonebe&#39;)" id="btn-Flonebe">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Flonebe&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Flonebe">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Gyes</div>
+          <div class="boss-duration">Respawn: 3h</div>
+          <div class="timer-display timer-inactive" id="timer-Gyes">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Gyes&#39;)" id="btn-Gyes">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Gyes&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Gyes">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Lindwurm</div>
+          <div class="boss-duration">Respawn: 3h</div>
+          <div class="timer-display timer-inactive" id="timer-Lindwurm">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Lindwurm&#39;)" id="btn-Lindwurm">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Lindwurm&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Lindwurm">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Thrandir</div>
+          <div class="boss-duration">Respawn: 4h</div>
+          <div class="timer-display timer-inactive" id="timer-Thrandir">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Thrandir&#39;)" id="btn-Thrandir">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Thrandir&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Thrandir">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Russomano</div>
+          <div class="boss-duration">Respawn: 4h</div>
+          <div class="timer-display timer-inactive" id="timer-Russomano">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Russomano&#39;)" id="btn-Russomano">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Russomano&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Russomano">✅ Listo para spawn</div>
+        </div><div class="boss-card">
+          <div class="boss-name">Briare</div>
+          <div class="boss-duration">Respawn: 5h</div>
+          <div class="timer-display timer-inactive" id="timer-Briare">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath(&#39;Briare&#39;)" id="btn-Briare">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer(&#39;Briare&#39;)">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-Briare">✅ Listo para spawn</div>
+        </div></div>
+
+    <div class="global-controls">
+      <button class="button btn-global" onclick="resetAllTimers()">🔄 Reset Todos</button>
+      <button class="button btn-test" onclick="startTestTimer()">🎵 Test Sonido (10s)</button>
+    </div>
+  </div>
+
+  <script>
+    const bosses = [
+      { name: 'Gigantus', duration: 2 * 60 * 60 },
+      { name: 'Arched', duration: 2 * 60 * 60 },
+      { name: 'Chimera', duration: 3 * 60 * 60 },
+      { name: 'Flonebe', duration: 3 * 60 * 60 },
+      { name: 'Gyes', duration: 3 * 60 * 60 },
+      { name: 'Lindwurm', duration: 3 * 60 * 60 },
+      { name: 'Thrandir', duration: 4 * 60 * 60 },
+      { name: 'Russomano', duration: 4 * 60 * 60 },
+      { name: 'Briare', duration: 5 * 60 * 60 }
+    ];
+
+    let timers = {};
+    let audioContext;
+    let alertShown = {};
+    let testEndTime = null;
+
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playAlarm() {
+      initAudio();
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.connect(gain); gain.connect(audioContext.destination);
+      osc.frequency.setValueAtTime(800, audioContext.currentTime);
+      osc.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+      osc.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+      osc.start(); osc.stop(audioContext.currentTime + 0.5);
+    }
+
+    function formatTime(sec) {
+      if (sec <= 0) return "00:00:00";
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = Math.floor(sec % 60);
+      return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    }
+
+    function initializeTimers() {
+      bosses.forEach(b => {
+        timers[b.name] = { endTime: null, duration: b.duration };
+        alertShown[b.name] = false;
+      });
+    }
+
+    function createBossHTML() {
+      const grid = document.getElementById('bossGrid');
+      bosses.forEach(boss => {
+        const card = document.createElement('div');
+        card.className = 'boss-card';
+        card.innerHTML = `
+          <div class="boss-name">${boss.name}</div>
+          <div class="boss-duration">Respawn: ${boss.duration/3600}h</div>
+          <div class="timer-display timer-inactive" id="timer-${boss.name}">--:--:--</div>
+          <div class="button-group">
+            <button class="button btn-death" onclick="markDeath('${boss.name}')" id="btn-${boss.name}">⚔️ Marcar Muerte</button>
+            <button class="button btn-reset" onclick="resetTimer('${boss.name}')">🔄 Reset</button>
+          </div>
+          <div class="status status-ready" id="status-${boss.name}">Listo para spawn</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function markDeath(name) {
+      initAudio();
+      timers[name].endTime = Date.now() + (timers[name].duration - 300) * 1000;
+      alertShown[name] = false;
+      showNotification(`${name} marcado como muerto! Timer iniciado.`);
+    }
+
+    function updateTimers() {
+      const now = Date.now();
+
+      bosses.forEach(boss => {
+        const t = timers[boss.name];
+        const disp = document.getElementById(`timer-${boss.name}`);
+        const btn = document.getElementById(`btn-${boss.name}`);
+        const st = document.getElementById(`status-${boss.name}`);
+
+        if (t.endTime) {
+          let rem = Math.floor((t.endTime - now) / 1000);
+          if (rem <= 0) {
+            t.endTime = null;
+            disp.textContent = "--:--:--";
+            disp.className = "timer-display timer-inactive";
+            btn.disabled = false; btn.textContent = "⚔️ Marcar Muerte";
+            st.textContent = "✅ Listo para spawn"; st.className = "status status-ready";
+            for (let i=0;i<5;i++) setTimeout(()=>playAlarm(), i*200);
+            showNotification(`¡${boss.name} respawneó!`);
+          } else {
+            disp.textContent = formatTime(rem);
+            if (rem <= 180) {
+              disp.className = "timer-display timer-warning";
+              st.textContent = "⚠️ ¡Por respawnear!"; st.className = "status status-warning";
+              if (!alertShown[boss.name]) {
+                alertShown[boss.name] = true;
+                for (let i=0;i<3;i++) setTimeout(()=>playAlarm(), i*150);
+                showNotification(`¡Atención! ${boss.name} respawnea en 3 minutos!`);
+              }
+            } else {
+              disp.className = "timer-display timer-active";
+              st.textContent = "🔄 Respawneando..."; st.className = "status status-respawning";
+            }
+            btn.disabled = true; btn.textContent = "⏳ Respawneando";
+          }
+        } else {
+          disp.textContent = "--:--:--";
+          disp.className = "timer-display timer-inactive";
+          btn.disabled = false; btn.textContent = "⚔️ Marcar Muerte";
+          st.textContent = "✅ Listo para spawn"; st.className = "status status-ready";
+        }
+      });
+
+      if (testEndTime) {
+        const testRem = Math.floor((testEndTime - now) / 1000);
+        if (testRem <= 0) {
+          testEndTime = null;
+          for (let i=0;i<5;i++) setTimeout(()=>playAlarm(), i*200);
+          showNotification("🎵 Test finalizado: sonó la alarma!");
+        }
+      }
+    }
+
+    function resetTimer(name) {
+      timers[name].endTime = null;
+      alertShown[name] = false;
+      updateTimers();
+      showNotification(`Timer de ${name} reseteado.`);
+    }
+
+    function resetAllTimers() {
+      bosses.forEach(b => resetTimer(b.name));
+      showNotification("Todos los timers han sido reseteados.");
+    }
+
+    function showNotification(msg) {
+      const old = document.querySelector('.notification'); if (old) old.remove();
+      const n = document.createElement('div');
+      n.className = "notification"; n.textContent = msg;
+      document.body.appendChild(n);
+      setTimeout(()=>{ if(n.parentNode) n.remove(); }, 4000);
+    }
+
+    function startTestTimer() {
+      initAudio();
+      testEndTime = Date.now() + 10000;
+      showNotification("🎵 Test iniciado: alarma en 10 segundos...");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initializeTimers();
+      createBossHTML();   // 👈 esto dibuja los bosses
+      setInterval(updateTimers, 1000);
+    });
+  </script>
+
+
+</body></html>
